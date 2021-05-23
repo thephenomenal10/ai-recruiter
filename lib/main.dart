@@ -1,10 +1,9 @@
+import 'package:ai_recruiter/core/services/auth.dart';
 import 'package:ai_recruiter/ui/shared/SizeConfig.dart';
-import 'package:ai_recruiter/ui/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'locator.dart';
-
 
 void main() {
   setupLocator();
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'AI Recruiter',
-          home: HomeScreen(),
+          home: Auth(),
         );
       });
     });

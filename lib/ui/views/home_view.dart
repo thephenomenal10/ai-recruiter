@@ -1,15 +1,17 @@
 import 'package:ai_recruiter/ui/shared/SizeConfig.dart';
+import 'package:ai_recruiter/ui/views/signin_view.dart';
 import 'package:ai_recruiter/ui/widgets/jobs_widget.dart';
 import 'package:ai_recruiter/ui/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeView extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
@@ -45,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 3.5 * SizeConfig.textMultiplier),
                 )),
             Search(),
+            RaisedButton(onPressed: _logout, child: new Text("Logout")),
             Padding(
               padding: EdgeInsets.only(
                   top: 2 * SizeConfig.heightMultiplier,
@@ -177,6 +180,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  void _logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("auth", false);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => SigninView()));
   }
 
   _category(String category) {
